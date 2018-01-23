@@ -381,7 +381,7 @@
         </plugins>
     </build>
 
-    <repositories>
+    <!--<repositories>
         <repository>
             <id>nexus</id>
             <name>nexus for gmdev</name>
@@ -392,16 +392,16 @@
                 <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
-    </repositories>
+    </repositories>-->
 
 
-    <distributionManagement>
+    <!--<distributionManagement>
         <repository>
             <id>releases</id>
             <name>releases</name>
             <url>http://10.129.0.147:8081/nexus/content/repositories/releases/</url>
         </repository>
-    </distributionManagement>
+    </distributionManagement>-->
   <modules>
     <module>promotion-api</module>
     <module>promotion-cron</module>
