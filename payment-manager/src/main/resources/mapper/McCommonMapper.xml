@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gomefinance.promotion.manager.mapper.McCommonMapper">
+
+    <select id="testDemo" resultType="com.gomefinance.promotion.manager.entity.TActivity"  parameterType="java.lang.String">
+        SELECT
+       		*
+        FROM
+        t_activity a
+		where  a.submitId=#{activityCode,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getProductsByPage" resultType="com.gomefinance.promotion.manager.dto.ActivityProductDto" parameterType="com.gomefinance.promotion.manager.dto.TActivityProductSearchDto">
+        select p1.* from t_activity_product p1, t_product p2
+        where p1.productCode = p2.code
+        <if test="type != null" >
+        and type = #{type,jdbcType=VARCHAR}
+        </if>
+        and activityCode = #{activityCode,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getProduct" resultType="com.gomefinance.promotion.manager.entity.TActivityProduct">
+        select p.* from t_activity_product p where p.activityCode = #{activityCode,jdbcType=VARCHAR} and p.productCode = #{productCode,jdbcType=VARCHAR} and p.periods = #{periods,jdbcType=INTEGER}
+    </select>
+
+    <select id="getActivityAndProduct" resultType="com.gomefinance.promotion.manager.dto.TActivityAndProductDto">
+        select
+        a.activityCode as activityCode,
+        a.activityName as activityName,
+        a.startTime as startTime,
+        a.endTime as endTime,
+        a.priority as priority,
+        a.activityFlag as activityFlag,
+        p.promotionCode as promotionCode
+        from t_activity_product p,t_activity a
+        where p.activityCode = a.activityCode
+        and a.activityCode = #{activityCode,jdbcType=VARCHAR}
+
+    </select>
+    <select id="getUsuallyActivityList" resultType="com.gomefinance.promotion.manager.entity.TActivity">
+        SELECT
+            ta.id,
+            ta.activityCode,
+            ta.activityName,
+            ta.priority
+        FROM
+            t_activity_stores tas,t_activity ta
+        WHERE
+            ta.activityCode = tas.activityCode
+        AND ta.activityFlag = '0'
+        AND tas.storeCode =#{storeCode,jdbcType=VARCHAR}
+        ORDER BY priority
+    </select>
+
+</mapper>

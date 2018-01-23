@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gomefinance.promotion.manager.mapper.TGoodsClassMapper" >
+  <resultMap id="BaseResultMap" type="com.gomefinance.promotion.manager.entity.TGoodsClass" >
+    <id column="classCode" property="classCode" jdbcType="VARCHAR" />
+    <result column="className" property="className" jdbcType="VARCHAR" />
+    <result column="classLevel" property="classLevel" jdbcType="CHAR" />
+    <result column="parentCode" property="parentCode" jdbcType="VARCHAR" />
+    <result column="isLeafe" property="isLeafe" jdbcType="VARCHAR" />
+    <result column="downPayment" property="downPayment" jdbcType="INTEGER" />
+    <result column="goodsClass" property="goodsClass" jdbcType="VARCHAR" />
+    <result column="departmentID" property="departmentID" jdbcType="VARCHAR" />
+    <result column="buyCount" property="buyCount" jdbcType="INTEGER" />
+    <result column="unPack" property="unPack" jdbcType="INTEGER" />
+    <result column="HEASBuyCount" property="HEASBuyCount" jdbcType="INTEGER" />
+    <result column="descr" property="descr" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    classCode, className, classLevel, parentCode, isLeafe, downPayment, goodsClass, departmentID, 
+    buyCount, unPack, HEASBuyCount, descr
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gomefinance.promotion.manager.entity.TGoodsClassExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_goods_class
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods_class
+    where classCode = #{classCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_goods_class
+    where classCode = #{classCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gomefinance.promotion.manager.entity.TGoodsClassExample" >
+    delete from t_goods_class
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gomefinance.promotion.manager.entity.TGoodsClass" useGeneratedKeys="true" keyProperty="classCode" >
+    insert into t_goods_class (className, classLevel, parentCode, 
+      isLeafe, downPayment, goodsClass, 
+      departmentID, buyCount, unPack, 
+      HEASBuyCount, descr)
+    values (#{className,jdbcType=VARCHAR}, #{classLevel,jdbcType=CHAR}, #{parentCode,jdbcType=VARCHAR}, 
+      #{isLeafe,jdbcType=VARCHAR}, #{downPayment,jdbcType=INTEGER}, #{goodsClass,jdbcType=VARCHAR}, 
+      #{departmentID,jdbcType=VARCHAR}, #{buyCount,jdbcType=INTEGER}, #{unPack,jdbcType=INTEGER}, 
+      #{HEASBuyCount,jdbcType=INTEGER}, #{descr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gomefinance.promotion.manager.entity.TGoodsClass" useGeneratedKeys="true" keyProperty="classCode" >
+    insert into t_goods_class
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="className != null" >
+        className,
+      </if>
+      <if test="classLevel != null" >
+        classLevel,
+      </if>
+      <if test="parentCode != null" >
+        parentCode,
+      </if>
+      <if test="isLeafe != null" >
+        isLeafe,
+      </if>
+      <if test="downPayment != null" >
+        downPayment,
+      </if>
+      <if test="goodsClass != null" >
+        goodsClass,
+      </if>
+      <if test="departmentID != null" >
+        departmentID,
+      </if>
+      <if test="buyCount != null" >
+        buyCount,
+      </if>
+      <if test="unPack != null" >
+        unPack,
+      </if>
+      <if test="HEASBuyCount != null" >
+        HEASBuyCount,
+      </if>
+      <if test="descr != null" >
+        descr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classLevel != null" >
+        #{classLevel,jdbcType=CHAR},
+      </if>
+      <if test="parentCode != null" >
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeafe != null" >
+        #{isLeafe,jdbcType=VARCHAR},
+      </if>
+      <if test="downPayment != null" >
+        #{downPayment,jdbcType=INTEGER},
+      </if>
+      <if test="goodsClass != null" >
+        #{goodsClass,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentID != null" >
+        #{departmentID,jdbcType=VARCHAR},
+      </if>
+      <if test="buyCount != null" >
+        #{buyCount,jdbcType=INTEGER},
+      </if>
+      <if test="unPack != null" >
+        #{unPack,jdbcType=INTEGER},
+      </if>
+      <if test="HEASBuyCount != null" >
+        #{HEASBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="descr != null" >
+        #{descr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gomefinance.promotion.manager.entity.TGoodsClassExample" resultType="java.lang.Integer" >
+    select count(*) from t_goods_class
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_goods_class
+    <set >
+      <if test="record.classCode != null" >
+        classCode = #{record.classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.className != null" >
+        className = #{record.className,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classLevel != null" >
+        classLevel = #{record.classLevel,jdbcType=CHAR},
+      </if>
+      <if test="record.parentCode != null" >
+        parentCode = #{record.parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLeafe != null" >
+        isLeafe = #{record.isLeafe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downPayment != null" >
+        downPayment = #{record.downPayment,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsClass != null" >
+        goodsClass = #{record.goodsClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentID != null" >
+        departmentID = #{record.departmentID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyCount != null" >
+        buyCount = #{record.buyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.unPack != null" >
+        unPack = #{record.unPack,jdbcType=INTEGER},
+      </if>
+      <if test="record.HEASBuyCount != null" >
+        HEASBuyCount = #{record.HEASBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.descr != null" >
+        descr = #{record.descr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_goods_class
+    set classCode = #{record.classCode,jdbcType=VARCHAR},
+      className = #{record.className,jdbcType=VARCHAR},
+      classLevel = #{record.classLevel,jdbcType=CHAR},
+      parentCode = #{record.parentCode,jdbcType=VARCHAR},
+      isLeafe = #{record.isLeafe,jdbcType=VARCHAR},
+      downPayment = #{record.downPayment,jdbcType=INTEGER},
+      goodsClass = #{record.goodsClass,jdbcType=VARCHAR},
+      departmentID = #{record.departmentID,jdbcType=VARCHAR},
+      buyCount = #{record.buyCount,jdbcType=INTEGER},
+      unPack = #{record.unPack,jdbcType=INTEGER},
+      HEASBuyCount = #{record.HEASBuyCount,jdbcType=INTEGER},
+      descr = #{record.descr,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gomefinance.promotion.manager.entity.TGoodsClass" >
+    update t_goods_class
+    <set >
+      <if test="className != null" >
+        className = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classLevel != null" >
+        classLevel = #{classLevel,jdbcType=CHAR},
+      </if>
+      <if test="parentCode != null" >
+        parentCode = #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeafe != null" >
+        isLeafe = #{isLeafe,jdbcType=VARCHAR},
+      </if>
+      <if test="downPayment != null" >
+        downPayment = #{downPayment,jdbcType=INTEGER},
+      </if>
+      <if test="goodsClass != null" >
+        goodsClass = #{goodsClass,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentID != null" >
+        departmentID = #{departmentID,jdbcType=VARCHAR},
+      </if>
+      <if test="buyCount != null" >
+        buyCount = #{buyCount,jdbcType=INTEGER},
+      </if>
+      <if test="unPack != null" >
+        unPack = #{unPack,jdbcType=INTEGER},
+      </if>
+      <if test="HEASBuyCount != null" >
+        HEASBuyCount = #{HEASBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="descr != null" >
+        descr = #{descr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where classCode = #{classCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gomefinance.promotion.manager.entity.TGoodsClass" >
+    update t_goods_class
+    set className = #{className,jdbcType=VARCHAR},
+      classLevel = #{classLevel,jdbcType=CHAR},
+      parentCode = #{parentCode,jdbcType=VARCHAR},
+      isLeafe = #{isLeafe,jdbcType=VARCHAR},
+      downPayment = #{downPayment,jdbcType=INTEGER},
+      goodsClass = #{goodsClass,jdbcType=VARCHAR},
+      departmentID = #{departmentID,jdbcType=VARCHAR},
+      buyCount = #{buyCount,jdbcType=INTEGER},
+      unPack = #{unPack,jdbcType=INTEGER},
+      HEASBuyCount = #{HEASBuyCount,jdbcType=INTEGER},
+      descr = #{descr,jdbcType=VARCHAR}
+    where classCode = #{classCode,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="selectTwoClassByFourLevelCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_goods_class
+    where
+    classCode =(SELECT
+      parentCode
+      FROM
+      t_goods_class
+      WHERE
+      classCode = (SELECT
+        parentCode
+        FROM
+        t_goods_class
+        WHERE
+        classCode = #{classCode,jdbcType=VARCHAR})
+    );
+  </select>
+  <select id="selectTwoClassByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  select
+  <include refid="Base_Column_List" />
+  from t_goods_class
+  where classCode = #{categoryCode,jdbcType=VARCHAR}
+  </select>
+</mapper>

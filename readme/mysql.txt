@@ -1,0 +1,21 @@
+############测试环境start####################
+IP:10.143.117.17
+数据库：promotion
+用户：promotion_w
+密码：ut5NnjG6NU1GKDxf
+端口：3306 	  
+#############测试环境end####################
+
+mysql ip:10.152.4.78 端口:3306
+账号： promotion_w   
+密码： Y2ViYmUzNWIwM2YxYmU5
+授权库：  所有库
+授权ip范围：10.%.%.%
+权限：读写
+
+mysql ip:10.152.4.78 端口:3306
+账号： promotion_r   
+密码： MjI5NjgzM2U4NWRlMGQz
+授权库：  所有库
+授权ip范围：10.%.%.%
+权限：只读

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry
+            location="E:\MavenTest\MavenJar\mysql\mysql-connector-java\5.1.34\mysql-connector-java-5.1.34.jar"/>
+    <context id="my" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://10.143.117.17:3306/promotion?useUnicode=true&amp;characterEncoding=UTF-8" 
+                        userId="promotion_w" password="ut5NnjG6NU1GKDxf"/>
+
+        <javaModelGenerator targetPackage="com.gomefinance.promotion.manager.entity"
+                            targetProject="promotion-manager\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="promotion-manager\src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.gomefinance.promotion.manager.mapper"
+                             targetProject="promotion-manager\src\main\java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+  		<!-- <table tableName="t_activity" domainObjectName="TActivity"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+             <property name="useActualColumnNames" value="true" />
+              <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="t_activity_goodsgroup" domainObjectName="TActivityGoodsgroup"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+             <property name="useActualColumnNames" value="true" />
+              <generatedKey column="grouid" sqlStatement="JDBC"/>
+        </table> -->
+        <table tableName="t_activity_product" domainObjectName="TActivityProduct"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+             <property name="useActualColumnNames" value="true" />
+              <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+       <!--  <table tableName="t_activity_stores" domainObjectName="TActivityStores"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+             <property name="useActualColumnNames" value="true" />
+              <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="t_product_detail" domainObjectName="TProductDetail"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+             <property name="useActualColumnNames" value="true" />
+              <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+         <table tableName="t_goods_class" domainObjectName="TGoodsClass"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+             <property name="useActualColumnNames" value="true" />
+              <generatedKey column="classCode" sqlStatement="JDBC"/>
+        </table>
+         <table tableName="t_goods" domainObjectName="TGoods"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+             <property name="useActualColumnNames" value="true" />
+              <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+         <table tableName="t_brand" domainObjectName="TBrand"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+             <property name="useActualColumnNames" value="true" />
+              <generatedKey column="id" sqlStatement="JDBC"/>
+        </table> -->
+    </context>
+</generatorConfiguration>

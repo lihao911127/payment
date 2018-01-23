@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gomefinance.promotion.manager.mapper.TGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.gomefinance.promotion.manager.entity.TGoods" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="goodsCode" property="goodsCode" jdbcType="VARCHAR" />
+    <result column="goodsName" property="goodsName" jdbcType="VARCHAR" />
+    <result column="categoryCode" property="categoryCode" jdbcType="VARCHAR" />
+    <result column="brandCode" property="brandCode" jdbcType="VARCHAR" />
+    <result column="brandName" property="brandName" jdbcType="VARCHAR" />
+    <result column="categoryName" property="categoryName" jdbcType="VARCHAR" />
+    <result column="groupid" property="groupid" jdbcType="BIGINT" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="downPaymentRatio" property="downPaymentRatio" jdbcType="DECIMAL" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="isThreeCorridors" property="isThreeCorridors" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, goodsCode, goodsName, categoryCode, brandCode, brandName, categoryName, groupid, 
+    count, downPaymentRatio, type, isThreeCorridors
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gomefinance.promotion.manager.entity.TGoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_goods
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gomefinance.promotion.manager.entity.TGoodsExample" >
+    delete from t_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gomefinance.promotion.manager.entity.TGoods" useGeneratedKeys="true" keyProperty="id" >
+    insert into t_goods (goodsCode, goodsName, categoryCode, 
+      brandCode, brandName, categoryName, 
+      groupid, count, downPaymentRatio, 
+      type, isThreeCorridors)
+    values (#{goodsCode,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR}, 
+      #{brandCode,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, 
+      #{groupid,jdbcType=BIGINT}, #{count,jdbcType=INTEGER}, #{downPaymentRatio,jdbcType=DECIMAL}, 
+      #{type,jdbcType=VARCHAR}, #{isThreeCorridors,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gomefinance.promotion.manager.entity.TGoods" useGeneratedKeys="true" keyProperty="id" >
+    insert into t_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsCode != null" >
+        goodsCode,
+      </if>
+      <if test="goodsName != null" >
+        goodsName,
+      </if>
+      <if test="categoryCode != null" >
+        categoryCode,
+      </if>
+      <if test="brandCode != null" >
+        brandCode,
+      </if>
+      <if test="brandName != null" >
+        brandName,
+      </if>
+      <if test="categoryName != null" >
+        categoryName,
+      </if>
+      <if test="groupid != null" >
+        groupid,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="downPaymentRatio != null" >
+        downPaymentRatio,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="isThreeCorridors != null" >
+        isThreeCorridors,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsCode != null" >
+        #{goodsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null" >
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null" >
+        #{brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName != null" >
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=BIGINT},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="downPaymentRatio != null" >
+        #{downPaymentRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="isThreeCorridors != null" >
+        #{isThreeCorridors,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gomefinance.promotion.manager.entity.TGoodsExample" resultType="java.lang.Integer" >
+    select count(*) from t_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_goods
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsCode != null" >
+        goodsCode = #{record.goodsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsName != null" >
+        goodsName = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryCode != null" >
+        categoryCode = #{record.categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandCode != null" >
+        brandCode = #{record.brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null" >
+        brandName = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryName != null" >
+        categoryName = #{record.categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupid != null" >
+        groupid = #{record.groupid,jdbcType=BIGINT},
+      </if>
+      <if test="record.count != null" >
+        count = #{record.count,jdbcType=INTEGER},
+      </if>
+      <if test="record.downPaymentRatio != null" >
+        downPaymentRatio = #{record.downPaymentRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isThreeCorridors != null" >
+        isThreeCorridors = #{record.isThreeCorridors,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_goods
+    set id = #{record.id,jdbcType=BIGINT},
+      goodsCode = #{record.goodsCode,jdbcType=VARCHAR},
+      goodsName = #{record.goodsName,jdbcType=VARCHAR},
+      categoryCode = #{record.categoryCode,jdbcType=VARCHAR},
+      brandCode = #{record.brandCode,jdbcType=VARCHAR},
+      brandName = #{record.brandName,jdbcType=VARCHAR},
+      categoryName = #{record.categoryName,jdbcType=VARCHAR},
+      groupid = #{record.groupid,jdbcType=BIGINT},
+      count = #{record.count,jdbcType=INTEGER},
+      downPaymentRatio = #{record.downPaymentRatio,jdbcType=DECIMAL},
+      type = #{record.type,jdbcType=VARCHAR},
+      isThreeCorridors = #{record.isThreeCorridors,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gomefinance.promotion.manager.entity.TGoods" >
+    update t_goods
+    <set >
+      <if test="goodsCode != null" >
+        goodsCode = #{goodsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        goodsName = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null" >
+        categoryCode = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null" >
+        brandCode = #{brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        brandName = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName != null" >
+        categoryName = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null" >
+        groupid = #{groupid,jdbcType=BIGINT},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="downPaymentRatio != null" >
+        downPaymentRatio = #{downPaymentRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="isThreeCorridors != null" >
+        isThreeCorridors = #{isThreeCorridors,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gomefinance.promotion.manager.entity.TGoods" >
+    update t_goods
+    set goodsCode = #{goodsCode,jdbcType=VARCHAR},
+      goodsName = #{goodsName,jdbcType=VARCHAR},
+      categoryCode = #{categoryCode,jdbcType=VARCHAR},
+      brandCode = #{brandCode,jdbcType=VARCHAR},
+      brandName = #{brandName,jdbcType=VARCHAR},
+      categoryName = #{categoryName,jdbcType=VARCHAR},
+      groupid = #{groupid,jdbcType=BIGINT},
+      count = #{count,jdbcType=INTEGER},
+      downPaymentRatio = #{downPaymentRatio,jdbcType=DECIMAL},
+      type = #{type,jdbcType=VARCHAR},
+      isThreeCorridors = #{isThreeCorridors,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

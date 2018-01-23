@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gomefinance.promotion.manager.mapper.TCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.gomefinance.promotion.manager.entity.TCode" >
+    <id column="counterName" property="counterName" jdbcType="VARCHAR" />
+    <result column="prefix" property="prefix" jdbcType="VARCHAR" />
+    <result column="step" property="step" jdbcType="INTEGER" />
+    <result column="digit" property="digit" jdbcType="INTEGER" />
+    <result column="curposition" property="curposition" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    counterName, prefix, step, digit, curposition
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gomefinance.promotion.manager.entity.TCodeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_code
+    where counterName = #{counterName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_code
+    where counterName = #{counterName,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gomefinance.promotion.manager.entity.TCodeExample" >
+    delete from t_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gomefinance.promotion.manager.entity.TCode" useGeneratedKeys="true" keyProperty="counterName" >
+    insert into t_code (prefix, step, digit, 
+      curposition)
+    values (#{prefix,jdbcType=VARCHAR}, #{step,jdbcType=INTEGER}, #{digit,jdbcType=INTEGER}, 
+      #{curposition,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gomefinance.promotion.manager.entity.TCode" useGeneratedKeys="true" keyProperty="counterName" >
+    insert into t_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prefix != null" >
+        prefix,
+      </if>
+      <if test="step != null" >
+        step,
+      </if>
+      <if test="digit != null" >
+        digit,
+      </if>
+      <if test="curposition != null" >
+        curposition,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prefix != null" >
+        #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="step != null" >
+        #{step,jdbcType=INTEGER},
+      </if>
+      <if test="digit != null" >
+        #{digit,jdbcType=INTEGER},
+      </if>
+      <if test="curposition != null" >
+        #{curposition,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gomefinance.promotion.manager.entity.TCodeExample" resultType="java.lang.Integer" >
+    select count(*) from t_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_code
+    <set >
+      <if test="record.counterName != null" >
+        counterName = #{record.counterName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prefix != null" >
+        prefix = #{record.prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.step != null" >
+        step = #{record.step,jdbcType=INTEGER},
+      </if>
+      <if test="record.digit != null" >
+        digit = #{record.digit,jdbcType=INTEGER},
+      </if>
+      <if test="record.curposition != null" >
+        curposition = #{record.curposition,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_code
+    set counterName = #{record.counterName,jdbcType=VARCHAR},
+      prefix = #{record.prefix,jdbcType=VARCHAR},
+      step = #{record.step,jdbcType=INTEGER},
+      digit = #{record.digit,jdbcType=INTEGER},
+      curposition = #{record.curposition,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gomefinance.promotion.manager.entity.TCode" >
+    update t_code
+    <set >
+      <if test="prefix != null" >
+        prefix = #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="step != null" >
+        step = #{step,jdbcType=INTEGER},
+      </if>
+      <if test="digit != null" >
+        digit = #{digit,jdbcType=INTEGER},
+      </if>
+      <if test="curposition != null" >
+        curposition = #{curposition,jdbcType=BIGINT},
+      </if>
+    </set>
+    where counterName = #{counterName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gomefinance.promotion.manager.entity.TCode" >
+    update t_code
+    set prefix = #{prefix,jdbcType=VARCHAR},
+      step = #{step,jdbcType=INTEGER},
+      digit = #{digit,jdbcType=INTEGER},
+      curposition = #{curposition,jdbcType=BIGINT}
+    where counterName = #{counterName,jdbcType=VARCHAR}
+  </update>
+</mapper>

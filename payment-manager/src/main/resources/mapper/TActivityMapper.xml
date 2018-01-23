@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gomefinance.promotion.manager.mapper.TActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.gomefinance.promotion.manager.entity.TActivity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="activityCode" property="activityCode" jdbcType="VARCHAR" />
+    <result column="activityName" property="activityName" jdbcType="VARCHAR" />
+    <result column="startTime" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="priority" property="priority" jdbcType="VARCHAR" />
+    <result column="banner" property="banner" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="activityFlag" property="activityFlag" jdbcType="VARCHAR" />
+    <result column="groupid" property="groupid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, activityCode, activityName, startTime, endTime, createtime, creator, priority, 
+    banner, url, activityFlag, groupid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gomefinance.promotion.manager.entity.TActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_activity
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_activity
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gomefinance.promotion.manager.entity.TActivityExample" >
+    delete from t_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gomefinance.promotion.manager.entity.TActivity" useGeneratedKeys="true" keyProperty="id" >
+    insert into t_activity (activityCode, activityName, startTime, 
+      endTime, createtime, creator, 
+      priority, banner, url, 
+      activityFlag, groupid)
+    values (#{activityCode,jdbcType=VARCHAR}, #{activityName,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, 
+      #{priority,jdbcType=VARCHAR}, #{banner,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{activityFlag,jdbcType=VARCHAR}, #{groupid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gomefinance.promotion.manager.entity.TActivity" useGeneratedKeys="true" keyProperty="id" >
+    insert into t_activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="activityCode != null" >
+        activityCode,
+      </if>
+      <if test="activityName != null" >
+        activityName,
+      </if>
+      <if test="startTime != null" >
+        startTime,
+      </if>
+      <if test="endTime != null" >
+        endTime,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="banner != null" >
+        banner,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="activityFlag != null" >
+        activityFlag,
+      </if>
+      <if test="groupid != null" >
+        groupid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="activityCode != null" >
+        #{activityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="activityName != null" >
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null" >
+        #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="activityFlag != null" >
+        #{activityFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gomefinance.promotion.manager.entity.TActivityExample" resultType="java.lang.Integer" >
+    select count(*) from t_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_activity
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.activityCode != null" >
+        activityCode = #{record.activityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityName != null" >
+        activityName = #{record.activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        startTime = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        endTime = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null" >
+        priority = #{record.priority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.banner != null" >
+        banner = #{record.banner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityFlag != null" >
+        activityFlag = #{record.activityFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupid != null" >
+        groupid = #{record.groupid,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_activity
+    set id = #{record.id,jdbcType=BIGINT},
+      activityCode = #{record.activityCode,jdbcType=VARCHAR},
+      activityName = #{record.activityName,jdbcType=VARCHAR},
+      startTime = #{record.startTime,jdbcType=TIMESTAMP},
+      endTime = #{record.endTime,jdbcType=TIMESTAMP},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      priority = #{record.priority,jdbcType=VARCHAR},
+      banner = #{record.banner,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      activityFlag = #{record.activityFlag,jdbcType=VARCHAR},
+      groupid = #{record.groupid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gomefinance.promotion.manager.entity.TActivity" >
+    update t_activity
+    <set >
+      <if test="activityCode != null" >
+        activityCode = #{activityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="activityName != null" >
+        activityName = #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        startTime = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        endTime = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null" >
+        banner = #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="activityFlag != null" >
+        activityFlag = #{activityFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null" >
+        groupid = #{groupid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gomefinance.promotion.manager.entity.TActivity" >
+    update t_activity
+    set activityCode = #{activityCode,jdbcType=VARCHAR},
+      activityName = #{activityName,jdbcType=VARCHAR},
+      startTime = #{startTime,jdbcType=TIMESTAMP},
+      endTime = #{endTime,jdbcType=TIMESTAMP},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=VARCHAR},
+      banner = #{banner,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      activityFlag = #{activityFlag,jdbcType=VARCHAR},
+      groupid = #{groupid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

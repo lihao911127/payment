@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gomefinance.promotion.manager.mapper.TActivityProductMapper" >
+  <resultMap id="BaseResultMap" type="com.gomefinance.promotion.manager.entity.TActivityProduct" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="productCode" property="productCode" jdbcType="VARCHAR" />
+    <result column="productName" property="productName" jdbcType="VARCHAR" />
+    <result column="activityCode" property="activityCode" jdbcType="VARCHAR" />
+    <result column="toplimit" property="toplimit" jdbcType="DECIMAL" />
+    <result column="lowlimit" property="lowlimit" jdbcType="DECIMAL" />
+    <result column="orderCount" property="orderCount" jdbcType="INTEGER" />
+    <result column="minAmount" property="minAmount" jdbcType="DECIMAL" />
+    <result column="maxAmount" property="maxAmount" jdbcType="DECIMAL" />
+    <result column="rate" property="rate" jdbcType="DECIMAL" />
+    <result column="promotionCode" property="promotionCode" jdbcType="VARCHAR" />
+    <result column="promotionRate" property="promotionRate" jdbcType="DECIMAL" />
+    <result column="periods" property="periods" jdbcType="VARCHAR" />
+    <result column="downPaymentRatio" property="downPaymentRatio" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, productCode, productName, activityCode, toplimit, lowlimit, orderCount, minAmount, 
+    maxAmount, rate, promotionCode, promotionRate, periods, downPaymentRatio
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gomefinance.promotion.manager.entity.TActivityProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_activity_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_activity_product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_activity_product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gomefinance.promotion.manager.entity.TActivityProductExample" >
+    delete from t_activity_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gomefinance.promotion.manager.entity.TActivityProduct" useGeneratedKeys="true" keyProperty="id" >
+    insert into t_activity_product (productCode, productName, activityCode, 
+      toplimit, lowlimit, orderCount, 
+      minAmount, maxAmount, rate, 
+      promotionCode, promotionRate, periods, 
+      downPaymentRatio)
+    values (#{productCode,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{activityCode,jdbcType=VARCHAR}, 
+      #{toplimit,jdbcType=DECIMAL}, #{lowlimit,jdbcType=DECIMAL}, #{orderCount,jdbcType=INTEGER}, 
+      #{minAmount,jdbcType=DECIMAL}, #{maxAmount,jdbcType=DECIMAL}, #{rate,jdbcType=DECIMAL}, 
+      #{promotionCode,jdbcType=VARCHAR}, #{promotionRate,jdbcType=DECIMAL}, #{periods,jdbcType=VARCHAR},
+      #{downPaymentRatio,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gomefinance.promotion.manager.entity.TActivityProduct" useGeneratedKeys="true" keyProperty="id" >
+    insert into t_activity_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productCode != null" >
+        productCode,
+      </if>
+      <if test="productName != null" >
+        productName,
+      </if>
+      <if test="activityCode != null" >
+        activityCode,
+      </if>
+      <if test="toplimit != null" >
+        toplimit,
+      </if>
+      <if test="lowlimit != null" >
+        lowlimit,
+      </if>
+      <if test="orderCount != null" >
+        orderCount,
+      </if>
+      <if test="minAmount != null" >
+        minAmount,
+      </if>
+      <if test="maxAmount != null" >
+        maxAmount,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+      <if test="promotionCode != null" >
+        promotionCode,
+      </if>
+      <if test="promotionRate != null" >
+        promotionRate,
+      </if>
+      <if test="periods != null" >
+        periods,
+      </if>
+      <if test="downPaymentRatio != null" >
+        downPaymentRatio,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="activityCode != null" >
+        #{activityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="toplimit != null" >
+        #{toplimit,jdbcType=DECIMAL},
+      </if>
+      <if test="lowlimit != null" >
+        #{lowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="orderCount != null" >
+        #{orderCount,jdbcType=INTEGER},
+      </if>
+      <if test="minAmount != null" >
+        #{minAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxAmount != null" >
+        #{maxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="promotionCode != null" >
+        #{promotionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionRate != null" >
+        #{promotionRate,jdbcType=DECIMAL},
+      </if>
+      <if test="periods != null" >
+        #{periods,jdbcType=VARCHAR},
+      </if>
+      <if test="downPaymentRatio != null" >
+        #{downPaymentRatio,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gomefinance.promotion.manager.entity.TActivityProductExample" resultType="java.lang.Integer" >
+    select count(*) from t_activity_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_activity_product
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.productCode != null" >
+        productCode = #{record.productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null" >
+        productName = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityCode != null" >
+        activityCode = #{record.activityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toplimit != null" >
+        toplimit = #{record.toplimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lowlimit != null" >
+        lowlimit = #{record.lowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderCount != null" >
+        orderCount = #{record.orderCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.minAmount != null" >
+        minAmount = #{record.minAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.maxAmount != null" >
+        maxAmount = #{record.maxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rate != null" >
+        rate = #{record.rate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.promotionCode != null" >
+        promotionCode = #{record.promotionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.promotionRate != null" >
+        promotionRate = #{record.promotionRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.periods != null" >
+        periods = #{record.periods,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downPaymentRatio != null" >
+        downPaymentRatio = #{record.downPaymentRatio,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_activity_product
+    set id = #{record.id,jdbcType=BIGINT},
+      productCode = #{record.productCode,jdbcType=VARCHAR},
+      productName = #{record.productName,jdbcType=VARCHAR},
+      activityCode = #{record.activityCode,jdbcType=VARCHAR},
+      toplimit = #{record.toplimit,jdbcType=DECIMAL},
+      lowlimit = #{record.lowlimit,jdbcType=DECIMAL},
+      orderCount = #{record.orderCount,jdbcType=INTEGER},
+      minAmount = #{record.minAmount,jdbcType=DECIMAL},
+      maxAmount = #{record.maxAmount,jdbcType=DECIMAL},
+      rate = #{record.rate,jdbcType=DECIMAL},
+      promotionCode = #{record.promotionCode,jdbcType=VARCHAR},
+      promotionRate = #{record.promotionRate,jdbcType=DECIMAL},
+      periods = #{record.periods,jdbcType=VARCHAR},
+      downPaymentRatio = #{record.downPaymentRatio,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gomefinance.promotion.manager.entity.TActivityProduct" >
+    update t_activity_product
+    <set >
+      <if test="productCode != null" >
+        productCode = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="activityCode != null" >
+        activityCode = #{activityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="toplimit != null" >
+        toplimit = #{toplimit,jdbcType=DECIMAL},
+      </if>
+      <if test="lowlimit != null" >
+        lowlimit = #{lowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="orderCount != null" >
+        orderCount = #{orderCount,jdbcType=INTEGER},
+      </if>
+      <if test="minAmount != null" >
+        minAmount = #{minAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxAmount != null" >
+        maxAmount = #{maxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="promotionCode != null" >
+        promotionCode = #{promotionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionRate != null" >
+        promotionRate = #{promotionRate,jdbcType=DECIMAL},
+      </if>
+      <if test="periods != null" >
+        periods = #{periods,jdbcType=VARCHAR},
+      </if>
+      <if test="downPaymentRatio != null" >
+        downPaymentRatio = #{downPaymentRatio,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gomefinance.promotion.manager.entity.TActivityProduct" >
+    update t_activity_product
+    set productCode = #{productCode,jdbcType=VARCHAR},
+      productName = #{productName,jdbcType=VARCHAR},
+      activityCode = #{activityCode,jdbcType=VARCHAR},
+      toplimit = #{toplimit,jdbcType=DECIMAL},
+      lowlimit = #{lowlimit,jdbcType=DECIMAL},
+      orderCount = #{orderCount,jdbcType=INTEGER},
+      minAmount = #{minAmount,jdbcType=DECIMAL},
+      maxAmount = #{maxAmount,jdbcType=DECIMAL},
+      rate = #{rate,jdbcType=DECIMAL},
+      promotionCode = #{promotionCode,jdbcType=VARCHAR},
+      promotionRate = #{promotionRate,jdbcType=DECIMAL},
+      periods = #{periods,jdbcType=VARCHAR},
+      downPaymentRatio = #{downPaymentRatio,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

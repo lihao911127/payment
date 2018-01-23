@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gomefinance.promotion.manager.mapper.TActivityStoresMapper" >
+  <resultMap id="BaseResultMap" type="com.gomefinance.promotion.manager.entity.TActivityStores" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="activityCode" property="activityCode" jdbcType="VARCHAR" />
+    <result column="storeCode" property="storeCode" jdbcType="VARCHAR" />
+    <result column="storeName" property="storeName" jdbcType="VARCHAR" />
+    <result column="mechantFlag" property="mechantFlag" jdbcType="VARCHAR" />
+    <result column="merchantCode" property="merchantCode" jdbcType="VARCHAR" />
+    <result column="merchantName" property="merchantName" jdbcType="VARCHAR" />
+    <result column="isAllStore" property="isAllStore" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, activityCode, storeCode, storeName, mechantFlag, merchantCode, merchantName, 
+    isAllStore
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gomefinance.promotion.manager.entity.TActivityStoresExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_activity_stores
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_activity_stores
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_activity_stores
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gomefinance.promotion.manager.entity.TActivityStoresExample" >
+    delete from t_activity_stores
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gomefinance.promotion.manager.entity.TActivityStores" useGeneratedKeys="true" keyProperty="id" >
+    insert into t_activity_stores (activityCode, storeCode, storeName, 
+      mechantFlag, merchantCode, merchantName, 
+      isAllStore)
+    values (#{activityCode,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR}, 
+      #{mechantFlag,jdbcType=VARCHAR}, #{merchantCode,jdbcType=VARCHAR}, #{merchantName,jdbcType=VARCHAR}, 
+      #{isAllStore,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gomefinance.promotion.manager.entity.TActivityStores" useGeneratedKeys="true" keyProperty="id" >
+    insert into t_activity_stores
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="activityCode != null" >
+        activityCode,
+      </if>
+      <if test="storeCode != null" >
+        storeCode,
+      </if>
+      <if test="storeName != null" >
+        storeName,
+      </if>
+      <if test="mechantFlag != null" >
+        mechantFlag,
+      </if>
+      <if test="merchantCode != null" >
+        merchantCode,
+      </if>
+      <if test="merchantName != null" >
+        merchantName,
+      </if>
+      <if test="isAllStore != null" >
+        isAllStore,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="activityCode != null" >
+        #{activityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCode != null" >
+        #{storeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null" >
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="mechantFlag != null" >
+        #{mechantFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantCode != null" >
+        #{merchantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantName != null" >
+        #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="isAllStore != null" >
+        #{isAllStore,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gomefinance.promotion.manager.entity.TActivityStoresExample" resultType="java.lang.Integer" >
+    select count(*) from t_activity_stores
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_activity_stores
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.activityCode != null" >
+        activityCode = #{record.activityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeCode != null" >
+        storeCode = #{record.storeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeName != null" >
+        storeName = #{record.storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mechantFlag != null" >
+        mechantFlag = #{record.mechantFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merchantCode != null" >
+        merchantCode = #{record.merchantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merchantName != null" >
+        merchantName = #{record.merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAllStore != null" >
+        isAllStore = #{record.isAllStore,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_activity_stores
+    set id = #{record.id,jdbcType=BIGINT},
+      activityCode = #{record.activityCode,jdbcType=VARCHAR},
+      storeCode = #{record.storeCode,jdbcType=VARCHAR},
+      storeName = #{record.storeName,jdbcType=VARCHAR},
+      mechantFlag = #{record.mechantFlag,jdbcType=VARCHAR},
+      merchantCode = #{record.merchantCode,jdbcType=VARCHAR},
+      merchantName = #{record.merchantName,jdbcType=VARCHAR},
+      isAllStore = #{record.isAllStore,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gomefinance.promotion.manager.entity.TActivityStores" >
+    update t_activity_stores
+    <set >
+      <if test="activityCode != null" >
+        activityCode = #{activityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCode != null" >
+        storeCode = #{storeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null" >
+        storeName = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="mechantFlag != null" >
+        mechantFlag = #{mechantFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantCode != null" >
+        merchantCode = #{merchantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantName != null" >
+        merchantName = #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="isAllStore != null" >
+        isAllStore = #{isAllStore,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gomefinance.promotion.manager.entity.TActivityStores" >
+    update t_activity_stores
+    set activityCode = #{activityCode,jdbcType=VARCHAR},
+      storeCode = #{storeCode,jdbcType=VARCHAR},
+      storeName = #{storeName,jdbcType=VARCHAR},
+      mechantFlag = #{mechantFlag,jdbcType=VARCHAR},
+      merchantCode = #{merchantCode,jdbcType=VARCHAR},
+      merchantName = #{merchantName,jdbcType=VARCHAR},
+      isAllStore = #{isAllStore,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
